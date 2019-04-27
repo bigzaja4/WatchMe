@@ -13,7 +13,7 @@
 
 <script>
 import Navbar from "./components/Navbar";
-
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "App",
   components: {
@@ -23,6 +23,12 @@ export default {
     return {
       //
     };
+  },
+  created() {
+    this.fetchStatus();
+  },
+  methods: {
+    ...mapActions(["fetchStatus"])
   }
 };
 </script>
