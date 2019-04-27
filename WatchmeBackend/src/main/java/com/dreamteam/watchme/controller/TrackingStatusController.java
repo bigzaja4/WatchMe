@@ -33,16 +33,19 @@ public class TrackingStatusController {
 
     @GetMapping("/status/{userId}")
     public ResponseEntity<List<TrackingStatus>> getUserTrackingDetailByUserId(@PathVariable String userId,
-            @RequestParam(required = false, defaultValue = "0") int page, @RequestParam(required = false, defaultValue = "0") int contentPerPage,
-            @RequestParam(required = false, defaultValue = "0") double longitude, @RequestParam(required = false, defaultValue = "0") double latitude,
-            @RequestParam(required = false, defaultValue = "0") String radius
-    ) {
-        return new ResponseEntity<List<TrackingStatus>>(trackingStatusService.getUserTrackingDetailByUserId(userId), HttpStatus.OK);
+            @RequestParam(required = false, defaultValue = "0") int page,
+            @RequestParam(required = false, defaultValue = "0") int contentPerPage,
+            @RequestParam(required = false, defaultValue = "0") double longitude,
+            @RequestParam(required = false, defaultValue = "0") double latitude,
+            @RequestParam(required = false, defaultValue = "0") String radius) {
+        return new ResponseEntity<List<TrackingStatus>>(trackingStatusService.getUserTrackingDetailByUserId(userId),
+                HttpStatus.OK);
     }
 
     @GetMapping("/status")
     public ResponseEntity<List<TrackingStatus>> getAllUserTrackingDetail() {
-        return new ResponseEntity<List<TrackingStatus>>(trackingStatusService.getAllUserTrackingDetail(), HttpStatus.OK);
+        return new ResponseEntity<List<TrackingStatus>>(trackingStatusService.getAllUserTrackingDetail(),
+                HttpStatus.OK);
     }
 
     @PostMapping("/status")
@@ -50,7 +53,8 @@ public class TrackingStatusController {
         System.out.println("----");
         System.out.println(trackingStatus);
         System.out.println("----");
-        return new ResponseEntity<TrackingStatus>(trackingStatusService.updateUserTrackingStatus(trackingStatus), HttpStatus.OK);
+        return new ResponseEntity<TrackingStatus>(trackingStatusService.updateUserTrackingStatus(trackingStatus),
+                HttpStatus.OK);
     }
 
 }

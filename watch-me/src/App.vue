@@ -3,7 +3,9 @@
     <Navbar/>
     <v-content>
       <keep-alive>
+        <v-container fill-height>
         <router-view></router-view>
+        </v-container>
       </keep-alive>
     </v-content>
   </v-app>
