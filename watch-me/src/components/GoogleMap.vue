@@ -26,22 +26,13 @@
       <br>
       <h3>heart-rate: {{infoWindow.marker.heartRate}}</h3>
     </gmap-info-window>
-    <div :key="1" v-if="cluster">
-      <gmap-marker
-        :key="11111"
-        :position="{lat:13.7248936,lng:100.4930261}"
-        @click="setInfoWindow({heartRate:100})"
-      ></gmap-marker>
-    </div>
-    <div :key="2" v-else>
-      <gmap-marker
-        :key="marker.id"
-        v-for="(marker) in markers"
-        :position="marker.position"
-        :title="marker.title"
-        @click="setInfoWindow(marker)"
-      ></gmap-marker>
-    </div>
+    <gmap-marker
+      :key="marker.id"
+      v-for="(marker) in markers"
+      :position="marker.position"
+      :title="marker.title"
+      @click="setInfoWindow(marker)"
+    ></gmap-marker>
   </gmap-map>
 </template>
 
@@ -60,6 +51,9 @@ export default {
   },
   computed: {
     ...mapGetters(["center", "zoomLevel", "markers", "infoWindow", "status"])
+  },
+  mounted() {
+    this.zoomOut(this.zoomLevel);
   },
   methods: {
     ...mapActions(["setInfoWindow", "closeInfoWindow"]),

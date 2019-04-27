@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin(origins = "*")
 @RestController
+@CrossOrigin(maxAge = 3600,origins = "*")
 public class TrackingStatusController {
 
     @Autowired
