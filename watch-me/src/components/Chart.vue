@@ -17,6 +17,7 @@
             
             var chart = this.$refs.chart;
             var ctx = chart.getContext("2d");
+            ctx.height = 200;
             var myChart;
             if(this.status == 0){
                 myChart = new Chart(ctx, {
@@ -36,6 +37,7 @@
                         scales: {
                             yAxes: [{
                                 ticks: {
+                                    suggestedMax: 140,
                                     beginAtZero: true
                                 }
                             }]
@@ -61,6 +63,7 @@
                         scales: {
                             yAxes: [{
                                 ticks: {
+                                    suggestedMax: 140,
                                     beginAtZero: true
                                 }
                             }]

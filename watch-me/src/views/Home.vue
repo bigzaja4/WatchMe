@@ -4,17 +4,15 @@
         <v-data-table
     :headers="headers"
     :items="status"
-    :loading="true"
     class="elevation-1"
     
   >
-    <v-progress-linear v-slot:progress color="blue" indeterminate></v-progress-linear>
     <template v-slot:items="props" >
         <tr @click="showChart(props.item.trackingStatusId,props.item.status)">
       <td class="text-xs-left">{{ props.item.username }}</td>
       <td class="text-xs-left">{{ props.item.heartRate}}</td>
       <td class="text-xs-left">{{ props.item.status }}</td>
-      <td class="text-xs-left"><v-btn small :to="{name: 'map' , props: {trackingId: props.item.trackingStatusId}}" >Normal</v-btn></td>
+      <td class="text-xs-left"><v-btn small color="primary" text-color="white" :to="{name: 'map' , props: {trackingId: props.item.trackingStatusId}}" >Map</v-btn></td>
         </tr>
 
     </template>
@@ -73,6 +71,14 @@ export default {
                 this.statusId = 1;
             }
         },
+        getStatusColor: function(status) {
+            if(status == 'normal'){
+              return 'primary';
+            }
+            else{
+              return 'red';
+            }
+        }
 
     },
     computed: {
