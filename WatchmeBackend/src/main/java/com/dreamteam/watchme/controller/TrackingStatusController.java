@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author wdrdr
  */
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 @RestController
 public class TrackingStatusController {
 
