@@ -9,6 +9,7 @@ import com.dreamteam.watchme.model.TrackingStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.dreamteam.watchme.repository.TrackingStatusRepository;
+import java.util.List;
 import javax.xml.ws.http.HTTPException;
 import org.springframework.http.HttpStatus;
 
@@ -37,7 +38,11 @@ public class TrackingStatusService {
         }
         throw new HTTPException(HttpStatus.GATEWAY_TIMEOUT.value());
     }
-    
-    
 
+    public List<TrackingStatus> getAllUserTrackingDetail() {
+        return trackingStatusRepository.findAll();
+    }
+
+    
+    
 }
