@@ -26,29 +26,48 @@
       <br>
       <h3>heart-rate: {{infoWindow.marker.heartRate}}</h3>
     </gmap-info-window>
-    <gmap-marker
-      :key="marker.id"
-      v-for="(marker) in markers"
-      :position="marker.position"
-      :title="marker.title"
-      :icon="marker.icon"
-      @click="setInfoWindow(marker)"
-    ></gmap-marker>
+    <div :key="1" v-if="cluster">
+      <gmap-marker
+        :key="11111"
+        :position="{lat:13.7248936,lng:100.4930261}"
+        @click="setInfoWindow({heartRate:100})"
+      ></gmap-marker>
+    </div>
+    <div :key="2" v-else>
+      <gmap-marker
+        :key="marker.id"
+        v-for="(marker) in markers"
+        :position="marker.position"
+        :title="marker.title"
+        @click="setInfoWindow(marker)"
+      ></gmap-marker>
+    </div>
   </gmap-map>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import GmapCluster from "vue2-google-maps/dist/components/cluster";
 export default {
   name: "GoogleMap",
+  components: {
+    GmapCluster
+  },
+  data() {
+    return {
+      cluster: true
+    };
+  },
   computed: {
     ...mapGetters(["center", "zoomLevel", "markers", "infoWindow", "status"])
   },
   methods: {
     ...mapActions(["setInfoWindow", "closeInfoWindow"]),
     zoomOut: function(event) {
-      if (event == 10) {
-        console.log(555);
+      if (event <= 10) {
+        this.cluster = true;
+      } else {
+        this.cluster = false;
       }
     }
   }
