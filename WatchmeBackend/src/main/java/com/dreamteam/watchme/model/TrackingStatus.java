@@ -22,9 +22,11 @@ public class TrackingStatus {
 
     private String username;
 
-    private long latitude;
+    private String status;
 
-    private long longitude;
+    private long heartRate;
+
+    private Position position;
 
     public String getTrackingStatusId() {
         return trackingStatusId;
@@ -50,25 +52,33 @@ public class TrackingStatus {
         this.username = username;
     }
 
-    public long getLatitude() {
-        return latitude;
+    public Position getPosition() {
+        return position;
     }
 
-    public void setLatitude(long latitude) {
-        this.latitude = latitude;
+    public void setPosition(Position position) {
+        this.position = position;
     }
 
-    public long getLongitude() {
-        return longitude;
+    public String getStatus() {
+        return status;
     }
 
-    public void setLongitude(long longitude) {
-        this.longitude = longitude;
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public long getHeartRate() {
+        return heartRate;
+    }
+
+    public void setHeartRate(long heartRate) {
+        this.heartRate = heartRate;
     }
 
     @Override
     public String toString() {
-        return "TrackingStatus{" + "trackingStatusId=" + trackingStatusId + ", userId=" + userId + ", username=" + username + ", latitude=" + latitude + ", longitude=" + longitude + '}';
+        return "TrackingStatus{" + "trackingStatusId=" + trackingStatusId + ", userId=" + userId + ", username=" + username + ", status=" + status + ", heartRate=" + heartRate + ", position=" + position + '}';
     }
 
 }
