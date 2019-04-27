@@ -24,6 +24,7 @@ import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.common.geo.GeoPoint;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -46,16 +47,35 @@ public class TrackingStatusService {
     @Autowired
     private TrackingStatusRepository trackingStatusRepository;
 
-    public List<TrackingStatus> getUserTrackingDetailByUserId(String userId) {
+    public List<TrackingStatus> getUserTrackingDetailByUserId(String userId, int page, int contentPerPage, double longtitude, double latitude, String radius) {
         System.out.println("userID : " + userId);
-        System.out.println(trackingStatusRepository.findByUserId(userId));
+        System.out.println("page : " + page + " contentPerpage : " + contentPerPage + "long : " + longtitude + " latitude : " + latitude + " radius : " + radius);
+        if (longtitude == 0.0 && latitude == 0.0) {
+            return trackingStatusRepository.findByUserId(userId);
+        } else if (longtitude != 0.0 && latitude != 0.0) {
+
+        }
         return trackingStatusRepository.findByUserId(userId);
+
     }
 
     public TrackingStatus updateUserTrackingStatus(TrackingStatus trackingStatus) {
+
         TrackingStatus updatedTrackingStatus = null;
         try {
-            
+            //lat lon
+//            GeoPoint geoPoint = new GeoPoint(trackingStatus.getPosition().getLatitude(), trackingStatus.getPosition().getLongitude());
+//            System.out.println("Geohash : " + geoPoint.geohash());
+//            trackingStatus.getPosition().setGeohash(geoPoint.geohash());
+
+            IndexRequest indexRequest = new IndexRequest(index);
+            String trackingStatusId = null;
+            Map<String, Object> pojoToMap = ElasticUtil.pojoToMap(trackingStatus);
+            System.out.println(pojoToMap.get("position").toString());
+            indexRequest.source(pojoToMap);
+            IndexResponse indexResponse = elasticClient.index(indexRequest, RequestOptions.DEFAULT);
+            trackingStatusId = indexResponse.getId();
+            trackingStatus.setElasticTrackingStatusId(trackingStatusId);
             updatedTrackingStatus = trackingStatusRepository.save(trackingStatus);
             return trackingStatus;
         } catch (Exception e) {
@@ -69,7 +89,6 @@ public class TrackingStatusService {
     public List<TrackingStatus> getAllUserTrackingDetail() {
         return trackingStatusRepository.findAll();
     }
-    
 
     public List<TrackingStatus> findTrackingStatusByUsingFilter(String[] eventTags, boolean isRecently, String eventDetail) throws IOException {
         BoolQueryBuilder queryFilter = new BoolQueryBuilder();
@@ -86,7 +105,7 @@ public class TrackingStatusService {
             System.out.println("TrackingStatus Detail");
             queryFilter.must(filterByTrackingStatusDetail(eventDetail));
         }
-        
+
         if (isRecently == true) {
             System.out.println("Recently");
             searchSourceBuilder = filterByRecently(searchSourceBuilder, "createEventDate");

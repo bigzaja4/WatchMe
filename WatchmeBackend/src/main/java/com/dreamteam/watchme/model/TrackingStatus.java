@@ -5,6 +5,7 @@
  */
 package com.dreamteam.watchme.model;
 
+import org.elasticsearch.common.geo.GeoPoint;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -18,6 +19,8 @@ public class TrackingStatus {
     @Id
     private String trackingStatusId;
 
+    private String elasticTrackingStatusId;
+
     private String userId;
 
     private String username;
@@ -26,6 +29,8 @@ public class TrackingStatus {
 
     private long heartRate;
 
+    //lat lon
+    //private GeoPoint position;
     private Position position;
 
     public String getTrackingStatusId() {
@@ -34,6 +39,14 @@ public class TrackingStatus {
 
     public void setTrackingStatusId(String trackingStatusId) {
         this.trackingStatusId = trackingStatusId;
+    }
+
+    public String getElasticTrackingStatusId() {
+        return elasticTrackingStatusId;
+    }
+
+    public void setElasticTrackingStatusId(String elasticTrackingStatusId) {
+        this.elasticTrackingStatusId = elasticTrackingStatusId;
     }
 
     public String getUserId() {
@@ -60,6 +73,13 @@ public class TrackingStatus {
         this.position = position;
     }
 
+//    public GeoPoint getPosition() {
+//        return position;
+//    }
+//
+//    public void setPosition(GeoPoint position) {
+//        this.position = position;
+//    }
     public String getStatus() {
         return status;
     }
@@ -78,7 +98,7 @@ public class TrackingStatus {
 
     @Override
     public String toString() {
-        return "TrackingStatus{" + "trackingStatusId=" + trackingStatusId + ", userId=" + userId + ", username=" + username + ", status=" + status + ", heartRate=" + heartRate + ", position=" + position + '}';
+        return "TrackingStatus{" + "trackingStatusId=" + trackingStatusId + ", elasticTrackingStatusId=" + elasticTrackingStatusId + ", userId=" + userId + ", username=" + username + ", status=" + status + ", heartRate=" + heartRate + ", position=" + position + '}';
     }
 
 }

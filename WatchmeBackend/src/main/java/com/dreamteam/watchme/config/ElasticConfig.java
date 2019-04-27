@@ -23,17 +23,17 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ElasticConfig {
 
-    @Value("${elasticsearch.host:localhost}")
-    private String host;
+    //@Value("${elasticsearch.host:138.91.37.216}")
+    private String host = "138.91.37.216";
 
-    @Value("${elasticsearch.port:9200}")
-    private int port;
+    //@Value("${elasticsearch.port:9200}")
+    private int port = 9200;
 
     @Bean(destroyMethod = "close")
     public RestHighLevelClient restHighLevelClient() {
         System.out.println("Starting Configuration");
         RestHighLevelClient client = new RestHighLevelClient(
-                RestClient.builder(new HttpHost(host, port))
+                RestClient.builder(new HttpHost(host, port))         
         );
         System.out.println(client);
         try {

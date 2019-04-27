@@ -38,14 +38,13 @@ public class TrackingStatusController {
             @RequestParam(required = false, defaultValue = "0") double longitude,
             @RequestParam(required = false, defaultValue = "0") double latitude,
             @RequestParam(required = false, defaultValue = "0") String radius) {
-        return new ResponseEntity<List<TrackingStatus>>(trackingStatusService.getUserTrackingDetailByUserId(userId),
+        return new ResponseEntity<List<TrackingStatus>>(trackingStatusService.getUserTrackingDetailByUserId(userId,page, contentPerPage,longitude,latitude,radius),
                 HttpStatus.OK);
     }
 
     @GetMapping("/status")
     public ResponseEntity<List<TrackingStatus>> getAllUserTrackingDetail() {
-        return new ResponseEntity<List<TrackingStatus>>(trackingStatusService.getAllUserTrackingDetail(),
-                HttpStatus.OK);
+        return new ResponseEntity<List<TrackingStatus>>(trackingStatusService.getAllUserTrackingDetail(), HttpStatus.OK);
     }
 
     @PostMapping("/status")
