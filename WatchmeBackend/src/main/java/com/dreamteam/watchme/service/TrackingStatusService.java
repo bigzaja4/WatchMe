@@ -59,7 +59,7 @@ public class TrackingStatusService {
         if (longitude != 0.0 & latitude != 0.0) {
             System.out.println("test");
             queryFilter.filter(QueryBuilders.geoDistanceQuery("position")
-                    .point(latitude, latitude)
+                    .point(latitude, longitude)
                     .distance(radius));
         }
         searchSourceBuilder.query(queryFilter);
