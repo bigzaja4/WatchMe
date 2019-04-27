@@ -23,8 +23,10 @@ public class TrackingStatusService {
     @Autowired
     private TrackingStatusRepository trackingStatusRepository;
 
-    public TrackingStatus getUserTrackingDetail(String userId) {
-        return trackingStatusRepository.findById(userId).get();
+    public List<TrackingStatus> getUserTrackingDetailByUserId(String userId) {
+        System.out.println("userID : " + userId);
+        System.out.println(trackingStatusRepository.findByUserId(userId));
+        return trackingStatusRepository.findByUserId(userId);
     }
 
     public TrackingStatus updateUserTrackingStatus(TrackingStatus trackingStatus) {

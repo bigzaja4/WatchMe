@@ -29,16 +29,16 @@ public class TrackingStatusController {
     private TrackingStatusService trackingStatusService;
 
     @GetMapping("/status/{userId}")
-    public ResponseEntity<TrackingStatus> getUserTrackingDetailBy(@PathVariable String userId) {
-        return new ResponseEntity<TrackingStatus>(trackingStatusService.getUserTrackingDetail(userId), HttpStatus.OK);
+    public ResponseEntity<List<TrackingStatus>> getUserTrackingDetailByUserId(@PathVariable String userId,
+            @RequestParam(required = false, defaultValue = "0") int page, @RequestParam(required = false, defaultValue = "0") int contentPerPage,
+            @RequestParam(required = false, defaultValue = "0") double longitude, @RequestParam(required = false, defaultValue = "0") double latitude,
+            @RequestParam(required = false, defaultValue = "0") String radius
+    ) {
+        return new ResponseEntity<List<TrackingStatus>>(trackingStatusService.getUserTrackingDetailByUserId(userId), HttpStatus.OK);
     }
 
     @GetMapping("/status")
-    public ResponseEntity<List<TrackingStatus>> getAllUserTrackingDetail(
-            @RequestParam(required = false, defaultValue = "0") int page, @RequestParam(required = false, defaultValue = "0") int contentPerPage,
-            @RequestParam(required = false, defaultValue = "0") double longitude, @RequestParam(required = false, defaultValue = "0") double latitude,
-            @RequestParam(required = false) String radius
-    ) {
+    public ResponseEntity<List<TrackingStatus>> getAllUserTrackingDetail() {
         return new ResponseEntity<List<TrackingStatus>>(trackingStatusService.getAllUserTrackingDetail(), HttpStatus.OK);
     }
 
