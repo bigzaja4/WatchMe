@@ -11,6 +11,7 @@
         scaleControl: false, 
         zoomControl: false
       }"
+    @zoom_changed="zoomOut"
   >
     <gmap-info-window
       v-if="infoWindow.marker"
@@ -41,10 +42,15 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   name: "GoogleMap",
   computed: {
-    ...mapGetters(["center", "zoomLevel", "markers", "infoWindow"])
+    ...mapGetters(["center", "zoomLevel", "markers", "infoWindow", "status"])
   },
   methods: {
-    ...mapActions(["setInfoWindow", "closeInfoWindow"])
+    ...mapActions(["setInfoWindow", "closeInfoWindow"]),
+    zoomOut: function(event) {
+      if (event == 10) {
+        console.log(555);
+      }
+    }
   }
 };
 </script>

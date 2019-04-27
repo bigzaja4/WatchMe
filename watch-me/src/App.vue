@@ -24,9 +24,13 @@ export default {
   },
   created() {
     this.fetchStatus();
+    this.timer = setInterval(this.fetchStatus, 3000);
   },
   methods: {
     ...mapActions(["fetchStatus"])
+  },
+  beforeDestroy() {
+    clearInterval(this.timer);
   }
 };
 </script>
