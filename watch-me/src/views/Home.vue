@@ -13,10 +13,7 @@
               >{{ props.item.status }}</v-chip>
             </td>
             <td class="text-xs-left">
-              <v-btn
-                small
-                :to="{name: 'map' , props: {trackingId: props.item.trackingStatusId}}"
-              >Location</v-btn>
+              <v-btn small @click="findLocation(props.item.trackingStatusId)">Location</v-btn>
             </td>
           </tr>
         </template>
@@ -31,7 +28,7 @@
 
 <script>
 import chartInfo from "../components/Chart";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import { setInterval } from "timers";
 export default {
   components: {
@@ -56,6 +53,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["setCenter", "setZoomLevel", "setInfoWindow"]),
     showChart: function(trackId, status) {
       if (this.idClicked == trackId) {
         this.idClicked = 0;
@@ -77,10 +75,17 @@ export default {
       } else {
         return "red";
       }
+    },
+    findLocation: function(id) {
+      let marker = this.markerByUserId(id);
+      this.setZoomLevel(17);
+      this.setCenter(marker.position);
+      this.setInfoWindow(marker);
+      this.$router.push("/map");
     }
   },
   computed: {
-    ...mapGetters(["status"])
+    ...mapGetters(["status", "markerByUserId"])
   }
 };
 </script>

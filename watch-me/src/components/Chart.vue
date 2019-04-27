@@ -11,8 +11,6 @@ export default {
     status
   },
   mounted() {
-    console.log(this.status);
-
     var chart = this.$refs.chart;
     var ctx = chart.getContext("2d");
     ctx.height = 200;

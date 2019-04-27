@@ -46,8 +46,8 @@ const getters = {
         username: item.username,
         status: item.status,
         position: {
-          lat: item.position.latitude,
-          lng: item.position.longitude
+          lat: item.position.lat,
+          lng: item.position.lon
         },
         heartRate: item.heartRate
       };
