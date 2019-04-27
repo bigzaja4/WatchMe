@@ -19,9 +19,9 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
     },
     {
-      path: '/statusList',
-      name: 'statusList',
-      component: () => import('./views/StatusList.vue')
+      path: '/map',
+      name: 'map',
+      component: () => import('./views/Map.vue')
     }
   ]
 })

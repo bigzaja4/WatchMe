@@ -9,46 +9,68 @@
 
     export default {
         name: 'app',
+        props: {
+            status  
+        },
         mounted() {
+            console.log(this.status);
+            
             var chart = this.$refs.chart;
             var ctx = chart.getContext("2d");
-            var myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange","Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-                    datasets: [{
-                        label: '# of Votes',
-                        data: [50, 19, 3, 5, 2, 3, 50, 19, 3, 5, 2, 3],
-                        // backgroundColor: [
-                        //     'rgba(255, 99, 132, 0.2)',
-                        //     'rgba(54, 162, 235, 0.2)',
-                        //     'rgba(255, 206, 86, 0.2)',
-                        //     'rgba(75, 192, 192, 0.2)',
-                        //     'rgba(153, 102, 255, 0.2)',
-                        //     'rgba(255, 159, 64, 0.2)'
-                        // ],
-                        // borderColor: [
-                        //     'rgba(255,99,132,1)',
-                        //     'rgba(54, 162, 235, 1)',
-                        //     'rgba(255, 206, 86, 1)',
-                        //     'rgba(75, 192, 192, 1)',
-                        //     'rgba(153, 102, 255, 1)',
-                        //     'rgba(255, 159, 64, 1)'
-                        // ],
-                        // borderWidth: 1
-                        lineTension: 0
-                    }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
+            ctx.height = 200;
+            var myChart;
+            if(this.status == 0){
+                myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ["18.52", "18.53", "18.54", "18.55", "18.56", "18.56","18.57", "18.58", "18.59", "19.00", "19.01", "19.02"],
+                        datasets: [{
+                            label: 'User Heart Rate',
+                            data: [60, 72, 65, 63, 66, 70, 69, 71, 62, 75, 70, 68],
+                            backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                            borderColor: 'rgba(255, 206, 86, 1)',
+                            borderWidth: 2,
+                            lineTension: 0
                         }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    suggestedMax: 140,
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
                     }
-                }
-            });
+                });
+            }
+            else{
+                myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ["18.52", "18.53", "18.54", "18.55", "18.56", "18.56","18.57", "18.58", "18.59", "19.00", "19.01", "19.02"],
+                        datasets: [{
+                            label: 'User Heart Rate',
+                            data: [110, 99, 115, 105, 108, 100, 103, 114, 108, 122, 110, 112],
+                            backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                            borderColor: 'rgba(255, 206, 86, 1)',
+                            borderWidth: 2,
+                            lineTension: 0
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    suggestedMax: 140,
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+            }
         }
     }
 

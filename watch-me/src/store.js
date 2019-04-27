@@ -65,6 +65,7 @@ const actions = {
   },
   fetchStatus: ({ commit }) => {
     axios.get("/status").then(response => {
+      console.log(response.data);
       commit("SET_STATUS", response.data);
     });
   },

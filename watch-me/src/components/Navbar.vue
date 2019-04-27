@@ -28,7 +28,7 @@ export default {
     left: false,
     items: [
       { title: "Home", icon: "home", route: "/" },
-      { title: "Report", icon: "list_alt", route: "/report" }
+      { title: "Map", icon: "place", route: "/map" }
     ]
   })
 };
