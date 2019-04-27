@@ -5,15 +5,22 @@
  */
 package com.dreamteam.watchme.model;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  *
  * @author wdrdr
  */
 public class Position {
 
+    @JsonProperty("lat")
     private double latitude;
 
+    @JsonProperty("lon")
     private double longitude;
+
+  //  private String geohash;
 
     public double getLatitude() {
         return latitude;
@@ -30,6 +37,14 @@ public class Position {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
+//
+//    public String getGeohash() {
+//        return geohash;
+//    }
+//
+//    public void setGeohash(String geohash) {
+//        this.geohash = geohash;
+//    }
 
     @Override
     public String toString() {
