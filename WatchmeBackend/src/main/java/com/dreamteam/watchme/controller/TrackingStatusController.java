@@ -34,19 +34,20 @@ public class TrackingStatusController {
     }
 
     @GetMapping("/status")
-    public ResponseEntity<List<TrackingStatus>> getAllUserTrackingDetail() {
+    public ResponseEntity<List<TrackingStatus>> getAllUserTrackingDetail(
+            @RequestParam(required = false, defaultValue = "0") int page, @RequestParam(required = false, defaultValue = "0") int contentPerPage,
+            @RequestParam(required = false, defaultValue = "0") double longitude, @RequestParam(required = false, defaultValue = "0") double latitude,
+            @RequestParam(required = false) String radius
+    ) {
         return new ResponseEntity<List<TrackingStatus>>(trackingStatusService.getAllUserTrackingDetail(), HttpStatus.OK);
     }
 
     @PostMapping("/status")
-    public ResponseEntity<TrackingStatus> updateUserTrackingStatus(
-            @RequestParam int page, @RequestParam String contentPerPage,
-            @RequestParam long longitude, @RequestParam long latitude,
-            @RequestParam String radius,
-            @RequestBody TrackingStatus trackingStatus) {
+    public ResponseEntity<TrackingStatus> updateUserTrackingStatus(@RequestBody TrackingStatus trackingStatus) {
+        System.out.println("----");
+        System.out.println(trackingStatus);
+        System.out.println("----");
         return new ResponseEntity<TrackingStatus>(trackingStatusService.updateUserTrackingStatus(trackingStatus), HttpStatus.OK);
     }
-    
-    
 
 }

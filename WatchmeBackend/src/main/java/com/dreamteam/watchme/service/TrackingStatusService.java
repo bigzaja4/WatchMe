@@ -31,18 +31,17 @@ public class TrackingStatusService {
         TrackingStatus updatedTrackingStatus = null;
         try {
             updatedTrackingStatus = trackingStatusRepository.save(trackingStatus);
+            return trackingStatus;
         } catch (Exception e) {
             System.out.println("===Exception===");
             System.out.println(e.getMessage());
             return trackingStatusRepository.save(trackingStatus);
         }
-        throw new HTTPException(HttpStatus.GATEWAY_TIMEOUT.value());
+
     }
 
     public List<TrackingStatus> getAllUserTrackingDetail() {
         return trackingStatusRepository.findAll();
     }
 
-    
-    
 }
