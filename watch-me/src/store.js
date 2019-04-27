@@ -37,15 +37,14 @@ const getters = {
   markers: (state, getters) => {
     return getters.status.map(item => {
       return {
-        id: item.user.id,
-        name: item.name,
-        surname: item.surname,
+        id: item.trackingStatusId,
+        username: item.username,
+        status: item.status,
         position: {
-          lat: item.position.lat,
-          lng: item.position.lng
+          lat: item.position.latitude,
+          lng: item.position.longitude
         },
-        heartRate: item.heartRate,
-        attitude: item.attitude
+        heartRate: item.heartRate
       };
     });
   },

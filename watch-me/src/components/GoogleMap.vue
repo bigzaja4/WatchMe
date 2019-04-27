@@ -19,12 +19,11 @@
       :opened="infoWindow.infoWindowOpen"
       @closeclick="closeInfoWindow"
     >
-      <h2>{{infoWindow.marker.name}} {{infoWindow.marker.surname}}</h2>
-      <br>
-      <p>heartRate: {{infoWindow.marker.heartRate}}</p>
-      <p>attitude: {{infoWindow.marker.attitude}}</p>
+      <h2>name: {{infoWindow.marker.username}}</h2>
+      <h3>status: {{infoWindow.marker.status}}</h3>
       <v-divider></v-divider>
       <br>
+      <h3>heart-rate: {{infoWindow.marker.heartRate}}</h3>
     </gmap-info-window>
     <gmap-marker
       :key="marker.id"
