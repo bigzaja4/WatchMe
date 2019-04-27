@@ -1,5 +1,5 @@
 <template>
-    <GoogleMap/>
+  <GoogleMap/>
 </template>
 
 <script>

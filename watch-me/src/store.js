@@ -9,8 +9,9 @@ const state = {
     lat: 13.7563,
     lng: 100.5018
   },
-  zoomLevel: 8,
+  zoomLevel: 10,
   status: [],
+  provinceStatus: [],
   infoWindow: {
     marker: null,
     infoWindowOpen: false,
@@ -21,7 +22,8 @@ const state = {
         height: -35
       }
     }
-  }
+  },
+  alertCount: 0
 };
 
 const getters = {
@@ -34,8 +36,25 @@ const getters = {
   status: state => {
     return state.status;
   },
-  markers: (state, getters) => {
-    return getters.status.map(item => {
+  provinceStatus: state => {
+    return state.provinceStatus;
+  },
+  markers: state => {
+    return state.status.map(item => {
+      return {
+        id: item.trackingStatusId,
+        username: item.username,
+        status: item.status,
+        position: {
+          lat: item.position.latitude,
+          lng: item.position.longitude
+        },
+        heartRate: item.heartRate
+      };
+    });
+  },
+  provinceMarkers: state => {
+    return state.provinceStatus.map(item => {
       return {
         id: item.trackingStatusId,
         username: item.username,
@@ -53,6 +72,9 @@ const getters = {
   },
   infoWindow: state => {
     return state.infoWindow;
+  },
+  alertCount: state => {
+    return state.alertCount;
   }
 };
 
@@ -65,8 +87,12 @@ const actions = {
   },
   fetchStatus: ({ commit }) => {
     axios.get("/status").then(response => {
-      console.log(response.data);
       commit("SET_STATUS", response.data);
+    });
+  },
+  fetchProvinceStatus: ({ commit }) => {
+    axios.get("/status").then(response => {
+      commit("SET_PROVINCESTATUS", response.data);
     });
   },
   setInfoWindow: ({ commit }, marker) => {
@@ -74,6 +100,12 @@ const actions = {
   },
   closeInfoWindow: ({ commit }) => {
     commit("CLOSE_INFOWINDOW");
+  },
+  setAlertCount: ({ commit }) => {
+    let result = state.status.filter(item => {
+      return item.status != "normal";
+    });
+    commit("SET_ALERTCOUNT", result.length);
   }
 };
 
@@ -87,6 +119,9 @@ const mutations = {
   SET_STATUS: (state, status) => {
     state.status = status;
   },
+  SET_PROVINCESTATUS: (state, provinceStatus) => {
+    state.provinceStatus = provinceStatus;
+  },
   SET_INFOWINDOW: (state, marker) => {
     state.infoWindow.marker = marker;
     if (state.infoWindow.currentIndex === marker.id) {
@@ -98,6 +133,9 @@ const mutations = {
   },
   CLOSE_INFOWINDOW: state => {
     state.infoWindow.infoWindowOpen = false;
+  },
+  SET_ALERTCOUNT: (state, alertCount) => {
+    state.alertCount = alertCount;
   }
 };
 
