@@ -1,9 +1,5 @@
 <template>
-  <div class="about">
-    <div id="content">
             <canvas ref="chart"></canvas>
-        </div>
-  </div>
 
   
 </template>
