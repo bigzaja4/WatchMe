@@ -11,8 +11,8 @@
         <tr @click="showChart(props.item.trackingStatusId,props.item.status)">
       <td class="text-xs-left">{{ props.item.username }}</td>
       <td class="text-xs-left">{{ props.item.heartRate}}</td>
-      <td class="text-xs-left">{{ props.item.status }}</td>
-      <td class="text-xs-left"><v-btn small color="primary" text-color="white" :to="{name: 'map' , props: {trackingId: props.item.trackingStatusId}}" >Map</v-btn></td>
+      <td class="text-xs-left"><v-chip :color="getStatusColor(props.item.status)" text-color="white" > {{ props.item.status }} </v-chip> </td>
+      <td class="text-xs-left"><v-btn small :to="{name: 'map' , props: {trackingId: props.item.trackingStatusId}}" >Location</v-btn></td>
         </tr>
 
     </template>
@@ -48,7 +48,7 @@ export default {
         },
           { text: 'Heart Rate', value: 'heartRate' },
           { text: 'Status', value: 'status' },
-          { text: 'Button', value: 'button' },
+          { text: 'Location', value: 'location' },
         ],
          
       }

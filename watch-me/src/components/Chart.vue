@@ -53,8 +53,8 @@
                         datasets: [{
                             label: 'User Heart Rate',
                             data: [110, 99, 115, 105, 108, 100, 103, 114, 108, 122, 110, 112],
-                            backgroundColor: 'rgba(255, 159, 64, 0.2)',
-                            borderColor: 'rgba(255, 206, 86, 1)',
+                            backgroundColor: 'rgba(255, 0, 0, 0.5)',
+                            borderColor: 'rgba(192, 13, 30, 1)',
                             borderWidth: 2,
                             lineTension: 0
                         }]
