@@ -34,10 +34,10 @@ public class TrackingStatusController {
     @GetMapping("/status/{userId}")
     public ResponseEntity<List<TrackingStatus>> getUserTrackingDetailByUserId(@PathVariable String userId,
             @RequestParam(required = false, defaultValue = "0") int page,
-            @RequestParam(required = false, defaultValue = "0") int contentPerPage,
-            @RequestParam(required = false, defaultValue = "0") double longitude,
-            @RequestParam(required = false, defaultValue = "0") double latitude,
-            @RequestParam(required = false, defaultValue = "0") String radius) {
+            @RequestParam(required = false, defaultValue = "20") int contentPerPage,
+            @RequestParam(required = false, defaultValue = "0.0") double longitude,
+            @RequestParam(required = false, defaultValue = "0.0") double latitude,
+            @RequestParam(required = false, defaultValue = "0km") String radius) {
         return new ResponseEntity<List<TrackingStatus>>(trackingStatusService.getUserTrackingDetailByUserId(userId,page, contentPerPage,longitude,latitude,radius),
                 HttpStatus.OK);
     }

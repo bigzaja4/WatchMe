@@ -47,16 +47,31 @@ public class TrackingStatusService {
     @Autowired
     private TrackingStatusRepository trackingStatusRepository;
 
-    public List<TrackingStatus> getUserTrackingDetailByUserId(String userId, int page, int contentPerPage, double longtitude, double latitude, String radius) {
+    public List<TrackingStatus> getUserTrackingDetailByUserId(String userId, int page, int contentPerPage, double longitude, double latitude, String radius) {
         System.out.println("userID : " + userId);
-        System.out.println("page : " + page + " contentPerpage : " + contentPerPage + "long : " + longtitude + " latitude : " + latitude + " radius : " + radius);
-        if (longtitude == 0.0 && latitude == 0.0) {
-            return trackingStatusRepository.findByUserId(userId);
-        } else if (longtitude != 0.0 && latitude != 0.0) {
+        System.out.println("page : " + page + " contentPerpage : " + contentPerPage + "long : " + longitude + " latitude : " + latitude + " radius : " + radius);
+        BoolQueryBuilder queryFilter = new BoolQueryBuilder();
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        SearchRequest searchRequest = new SearchRequest(index);
+        SearchResponse searchResponse = null;
 
+        queryFilter.must(QueryBuilders.termQuery("userId", userId));
+        if (longitude != 0.0 & latitude != 0.0) {
+            System.out.println("test");
+            queryFilter.filter(QueryBuilders.geoDistanceQuery("position")
+                    .point(latitude, latitude)
+                    .distance(radius));
         }
-        return trackingStatusRepository.findByUserId(userId);
-
+        searchSourceBuilder.query(queryFilter);
+        searchSourceBuilder
+                .from(page)
+                .size(contentPerPage);
+        try {
+            searchResponse = elasticClient.search(searchRequest.source(searchSourceBuilder), RequestOptions.DEFAULT);
+        } catch (IOException ex) {
+            Logger.getLogger(TrackingStatusService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ElasticUtil.searchHitsToList(searchResponse.getHits(), TrackingStatus.class);
     }
 
     public TrackingStatus updateUserTrackingStatus(TrackingStatus trackingStatus) {
