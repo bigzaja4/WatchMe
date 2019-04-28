@@ -1,9 +1,10 @@
 <template>
   <v-layout row wrap justify-center>
     <v-flex xs12>
-      <v-btn-toggle v-model="toggle" mandatory>
-        <v-btn value="true">On</v-btn>
-        <v-btn value="false">Off</v-btn>
+      Show only status SOS
+      <v-btn-toggle flat v-model="toggle" mandatory>
+        <v-btn flat>On</v-btn>
+        <v-btn flat>Off</v-btn>
       </v-btn-toggle>
       <v-data-table :headers="headers" :items="status" class="elevation-1">
         <template v-slot:items="props">
@@ -39,7 +40,6 @@ export default {
   },
   data() {
     return {
-      toggle: false,
       statusId: 0,
       isShowChart: false,
       idClicked: 0,
@@ -57,7 +57,12 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["setCenter", "setZoomLevel", "setInfoWindow"]),
+    ...mapActions([
+      "setCenter",
+      "setZoomLevel",
+      "setInfoWindow",
+      "setShowOnlySOS"
+    ]),
     showChart: function(trackId, status) {
       if (this.idClicked == trackId) {
         this.idClicked = 0;
@@ -89,7 +94,15 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["status", "markerByUserId"])
+    ...mapGetters(["status", "markerByUserId", "showOnlySOS"]),
+    toggle: {
+      get() {
+        return this.showOnlySOS;
+      },
+      set(value) {
+        this.setShowOnlySOS(value);
+      }
+    }
   }
 };
 </script>
