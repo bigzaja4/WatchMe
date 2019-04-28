@@ -1,0 +1,5 @@
+applications:
+- name: watchme-backend
+  #random-route: true
+  memory: 256MB
+  path: target/watchme-0.0.1-SNAPSHOT.jar
