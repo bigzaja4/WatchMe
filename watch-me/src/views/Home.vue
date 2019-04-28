@@ -1,6 +1,10 @@
 <template>
   <v-layout row wrap justify-center>
     <v-flex xs12>
+      <v-btn-toggle v-model="toggle" mandatory>
+        <v-btn value="true">On</v-btn>
+        <v-btn value="false">Off</v-btn>
+      </v-btn-toggle>
       <v-data-table :headers="headers" :items="status" class="elevation-1">
         <template v-slot:items="props">
           <tr @click="showChart(props.item.trackingStatusId,props.item.status)">
@@ -35,6 +39,7 @@ export default {
   },
   data() {
     return {
+      toggle: false,
       statusId: 0,
       isShowChart: false,
       idClicked: 0,
