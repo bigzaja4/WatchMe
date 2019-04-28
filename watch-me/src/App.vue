@@ -19,6 +19,7 @@
       :vertical="mode === 'vertical'"
     >
       SOS: {{ alertCount }} people!!
+      <v-btn color="yellow" flat to="/" @click="snackbar = false">Open</v-btn>
       <v-btn color="pink" flat @click="snackbar = false">Close</v-btn>
     </v-snackbar>
   </v-app>

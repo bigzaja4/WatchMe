@@ -41,6 +41,7 @@ const getters = {
   },
   markers: state => {
     return state.status.map(item => {
+      let check = item.status != "normal" ? 1 : null;
       return {
         id: item.trackingStatusId,
         username: item.username,
@@ -49,7 +50,8 @@ const getters = {
           lat: item.position.lat,
           lng: item.position.lon
         },
-        heartRate: item.heartRate
+        heartRate: item.heartRate,
+        animation: check
       };
     });
   },

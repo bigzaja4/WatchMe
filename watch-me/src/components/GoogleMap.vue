@@ -31,8 +31,12 @@
       v-for="(marker) in markers"
       :position="marker.position"
       :title="marker.title"
+      :animation="marker.animation"
       @click="setInfoWindow(marker)"
     ></gmap-marker>
+    <v-btn icon @click="resetZoom" slot="visible">
+      <v-icon>zoom_out_map</v-icon>
+    </v-btn>
   </gmap-map>
 </template>
 
@@ -63,6 +67,10 @@ export default {
       } else {
         this.cluster = false;
       }
+    },
+    resetZoom: function() {
+      this.$refs.gmap.$mapObject.setZoom(5);
+      this.$refs.gmap.$mapObject.setCenter({ lat: 13.7563, lng: 100.5018 });
     }
   }
 };
@@ -73,5 +81,13 @@ export default {
 .vue-map {
   width: 100%;
   height: 100%;
+}
+.v-btn {
+  top: 0%;
+  right: 0%;
+  background-color: #4169e1;
+  color: white;
+  position: absolute;
+  z-index: 1;
 }
 </style>
