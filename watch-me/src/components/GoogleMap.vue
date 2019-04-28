@@ -42,12 +42,8 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import GmapCluster from "vue2-google-maps/dist/components/cluster";
 export default {
   name: "GoogleMap",
-  components: {
-    GmapCluster
-  },
   data() {
     return {
       cluster: true

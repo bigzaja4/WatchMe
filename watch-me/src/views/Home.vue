@@ -27,9 +27,8 @@
 </template>
 
 <script>
-import chartInfo from "../components/Chart";
+const chartInfo = () => import("../components/Chart");
 import { mapGetters, mapActions } from "vuex";
-import { setInterval } from "timers";
 export default {
   components: {
     chartInfo
