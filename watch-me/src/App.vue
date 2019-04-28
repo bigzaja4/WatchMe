@@ -38,7 +38,7 @@ export default {
       y: "bottom",
       x: "right",
       mode: "multi-line",
-      timeout: 2000
+      timeout: 0 
     };
   },
   computed: {
